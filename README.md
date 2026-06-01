@@ -21,6 +21,7 @@ Publicar dados em tópicos MQTT;
 Receber comandos remotos;
 Acionar um LED como atuador;
 Demonstrar conceitos de sensoriamento, comunicação e atuação em sistemas IoT.
+
 🏗️ Arquitetura do Sistema
 Camada de Sensoriamento
 
@@ -143,6 +144,7 @@ Funções:
 Conexão Wi-Fi;
 Comunicação MQTT;
 Leitura do sensor DHT22.
+
 🧩 Estrutura do Código
 conectarWiFi()
 
@@ -167,6 +169,7 @@ Verificação da conexão MQTT;
 Leitura do sensor;
 Publicação dos dados;
 Controle automático do LED.
+
 ✅ Resultados Obtidos
 
 Durante os testes foi possível validar:
@@ -201,6 +204,7 @@ Banco de dados para histórico;
 Aplicativo móvel;
 Notificações automáticas;
 Inclusão de novos sensores.
+
 🛠️ Tecnologias Utilizadas
 ESP32
 MQTT
@@ -210,14 +214,18 @@ MQTT Explorer
 Wokwi
 Arduino Framework
 C++
+
 📂 Repositório
 [link](https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt)
+
 🎥 Demonstração
 https://youtube.com/SEU-VIDEO********** SUBSTITUIR
+
 👥 Integrantes
 Henrique Coelho
 Jhonatas Melo
 Murillo Couto
+
 📄 Licença
 
 Este projeto foi desenvolvido para fins acadêmicos no curso de Análise e Desenvolvimento de Sistemas da Universidade Presbiteriana Mackenzie.
