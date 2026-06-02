@@ -79,7 +79,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
 
-  dht.begin(); 
+  dht.begin();
 
   conectarWiFi();
   client.setServer(mqttServer, mqttPort);
