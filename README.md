@@ -18,6 +18,7 @@ Este projeto apresenta o desenvolvimento de um sistema de monitoramento ambienta
 A proposta consiste em monitorar temperatura e umidade do ambiente, transmitindo essas informações para um broker MQTT através da internet. Além disso, o sistema possui um atuador representado por um LED, que pode ser acionado automaticamente em função da temperatura ou remotamente por meio de mensagens MQTT.
 
 O projeto foi desenvolvido e testado utilizando a plataforma de simulação Wokwi.
+link da ferramenta: https://wokwi.com/
 
 
 
@@ -104,27 +105,11 @@ Porta:
 
 Fluxo geral do sistema:
 
-Sensor DHT22
-↓
-ESP32
-↓
-Wi-Fi
-↓
-Broker MQTT
-↓
-MQTT Explorer
+Sensor DHT22 → ESP32 → Wi-Fi → Broker MQTT → MQTT Explorer
 
 Controle remoto:
+MQTT Explorer → Broker MQTT → ESP32 → LED
 
-MQTT Explorer
-↓
-Broker MQTT
-↓
-ESP32
-↓
-LED
-
----
 
 # 6. Comunicação MQTT
 
@@ -134,7 +119,7 @@ Modelo utilizado:
 
 Publish / Subscribe
 
----
+
 
 ## Tópicos MQTT
 
@@ -146,7 +131,7 @@ Função:
 
 Publicação dos valores de temperatura.
 
----
+
 
 ### Umidade
 
@@ -156,7 +141,7 @@ Função:
 
 Publicação dos valores de umidade.
 
----
+
 
 ### Controle do LED
 
@@ -172,7 +157,7 @@ ON
 
 OFF
 
----
+
 
 # 7. Funcionamento Esperado
 
@@ -197,7 +182,7 @@ conectado!
 Inscrito no tópico:
 mackenzie/iot/grupo12/led
 
----
+
 
 ## Leitura do Sensor
 
@@ -215,7 +200,7 @@ Umidade: 60 %
 
 Dados enviados via MQTT
 
----
+
 
 ## Controle Automático
 
@@ -234,7 +219,7 @@ LED ligado automaticamente
 
 Temperatura acima do limite
 
----
+
 
 ## Controle Remoto
 
@@ -260,7 +245,7 @@ Resultado esperado:
 
 LED desligado.
 
----
+
 
 # 8. Estrutura do Software
 
@@ -278,7 +263,7 @@ DHTesp.h
 
 Responsável pela leitura do sensor DHT22.
 
----
+
 
 # 9. Estrutura do Código
 
@@ -286,13 +271,13 @@ Responsável pela leitura do sensor DHT22.
 
 Função responsável pela conexão do ESP32 à rede sem fio.
 
----
+
 
 ## conectarMQTT()
 
 Função responsável pela conexão com o broker MQTT.
 
----
+
 
 ## callback()
 
@@ -304,7 +289,7 @@ Executa:
 * Interpretação do comando.
 * Acionamento do LED.
 
----
+
 
 ## loop()
 
@@ -315,7 +300,7 @@ Executa continuamente:
 * Publicação dos dados.
 * Controle automático do LED.
 
----
+
 
 # 10. Resultados Obtidos
 
@@ -348,7 +333,7 @@ conectado!
 Inscrito no tópico:
 mackenzie/iot/grupo12/led
 
----
+
 
 # 11. Limitações Encontradas
 
@@ -366,7 +351,7 @@ Como consequência:
 
 Entretanto, a infraestrutura de comunicação MQTT permaneceu funcional durante os testes.
 
----
+
 
 # 12. Melhorias Futuras
 
@@ -377,7 +362,7 @@ Entretanto, a infraestrutura de comunicação MQTT permaneceu funcional durante 
 * Notificações automáticas.
 * Inclusão de sensores adicionais.
 
----
+
 
 # 13. Tecnologias Utilizadas
 
@@ -390,15 +375,15 @@ Entretanto, a infraestrutura de comunicação MQTT permaneceu funcional durante 
 * Arduino Framework
 * C++
 
----
+
 
 # 14. Repositório
 
 Link do GitHub:
 
-[INSERIR LINK]
+https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt
 
----
+
 
 # 15. Vídeo Demonstrativo
 
@@ -406,7 +391,7 @@ Link do YouTube:
 
 [INSERIR LINK]
 
----
+
 
 # 16. Conclusão
 
