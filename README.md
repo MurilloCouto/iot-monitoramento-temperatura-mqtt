@@ -4,10 +4,12 @@
 
 ### Integrantes
 
-* Henrique Coelho
-* [Nome do Integrante 2]
-* [Nome do Integrante 3]
+* Henrique dos Santos Coelho
+* Jhonatas Correia Melo
+* Murilo Alves Couto
 
+### Professor
+* Andre Luis de Oliveira
 ---
 
 # 1. Visão Geral do Projeto
