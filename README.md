@@ -1,4 +1,4 @@
-# Sistema de Monitoramento da Temperatura do Ar Utilizando IoT e MQTT
+# Sistema de Monitoramento da Temperatura do Ar Utilizando IoT com HiveMQ
 
 ## Grupo 12
 
@@ -11,16 +11,18 @@
 ### Professor
 * Andre Luis de Oliveira
 
+---
+
 # 1. Visão Geral do Projeto
 
-Este projeto apresenta o desenvolvimento de um sistema de monitoramento ambiental baseado em Internet das Coisas (IoT), utilizando um microcontrolador ESP32, um sensor DHT22 e o protocolo MQTT para comunicação entre dispositivos.
+Este projeto apresenta o desenvolvimento de um sistema de monitoramento ambiental baseado em Internet das Coisas (IoT), utilizando um microcontrolador ESP32, um sensor DHT22 e o protocolo MQTT com broker HiveMQ para comunicação entre dispositivos.
 
-A proposta consiste em monitorar temperatura e umidade do ambiente, transmitindo essas informações para um broker MQTT através da internet. Além disso, o sistema possui um atuador representado por um LED, que pode ser acionado automaticamente em função da temperatura ou remotamente por meio de mensagens MQTT.
+A proposta consiste em monitorar temperatura e umidade do ambiente, transmitindo essas informações para um broker MQTT na internet. Além disso, o sistema possui um atuador representado por um LED, que pode ser acionado automaticamente em função da temperatura ou remotamente por meio de mensagens MQTT.
 
-O projeto foi desenvolvido e testado utilizando a plataforma de simulação Wokwi.
+O projeto foi desenvolvido e testado utilizando a plataforma de simulação Wokwi.  
 Link da ferramenta: https://wokwi.com/
 
-
+---
 
 # 2. Objetivo
 
@@ -28,12 +30,13 @@ Desenvolver uma solução IoT capaz de:
 
 * Realizar leitura de temperatura e umidade.
 * Conectar-se à internet utilizando Wi-Fi.
-* Comunicar-se através do protocolo MQTT.
+* Utilizar o protocolo MQTT com broker HiveMQ.
 * Publicar informações em tópicos MQTT.
 * Receber comandos remotos.
 * Acionar um dispositivo de saída (LED).
 * Demonstrar os conceitos de sensoriamento, comunicação e atuação em sistemas IoT.
 
+---
 
 # 3. Arquitetura do Sistema
 
@@ -41,398 +44,247 @@ O sistema foi estruturado em três camadas principais:
 
 ## Camada de Sensoriamento
 
-Responsável pela coleta dos dados ambientais.
-
-Componente utilizado:
-
-* Sensor DHT22
-
-Dados coletados:
-
-* Temperatura (°C)
-* Umidade Relativa (%)
-
+* Sensor DHT22  
+* Coleta de temperatura (°C) e umidade (%)
 
 ## Camada de Processamento
 
-Responsável pelo tratamento das informações.
+* ESP32 DevKit V4  
 
-Componente utilizado:
+Funções:
 
-* ESP32 DevKit V4
-
-Funções executadas:
-
-* Leitura do sensor.
-* Processamento dos dados.
-* Controle do LED.
-* Comunicação com o broker MQTT.
-
+* Leitura do sensor  
+* Processamento  
+* Controle do LED  
+* Comunicação MQTT  
 
 ## Camada de Comunicação
 
-Responsável pela transmissão de dados.
+Tecnologias:
 
-Tecnologias utilizadas:
-
-* Wi-Fi
-* MQTT
+* Wi-Fi  
+* MQTT (HiveMQ)
 
 Broker utilizado:
 
-broker.hivemq.com
+broker.hivemq.com  
 
 Porta:
 
-1883
+1883  
 
+---
 
 # 4. Componentes Utilizados
 
-| Componente      | Função                          |
-| --------------- | ------------------------------- |
-| ESP32 DevKit V4 | Microcontrolador principal      |
-| DHT22           | Sensor de temperatura e umidade |
-| LED Vermelho    | Indicador visual                |
-| Resistor 220 Ω  | Proteção do LED                 |
-| Broker MQTT     | Comunicação Publish/Subscribe   |
-| MQTT Explorer   | Monitoramento dos tópicos       |
-| Wokwi           | Simulação do circuito           |
+| Componente | Função |
+|----------|--------|
+| ESP32 DevKit V4 | Microcontrolador |
+| DHT22 | Sensor |
+| LED Vermelho | Atuador |
+| Resistor 220 Ω | Proteção |
+| HiveMQ | Broker MQTT |
+| MQTT Explorer / Web Client HiveMQ | Monitoramento |
+| Wokwi | Simulação |
 
-
+---
 
 # 5. Diagrama de Funcionamento
 
-Fluxo geral do sistema:
+Fluxo geral:
 
-Sensor DHT22 → ESP32 → Wi-Fi → Broker MQTT → MQTT Explorer
+Sensor DHT22 → ESP32 → Wi-Fi → HiveMQ → Cliente  
 
 Fluxo de controle:
 
-MQTT Explorer → Broker MQTT → ESP32 → LED
+Cliente → HiveMQ → ESP32 → LED  
 
+---
 
 # 6. Comunicação MQTT
 
-O protocolo MQTT foi utilizado para permitir a comunicação entre dispositivos conectados.
-
 Modelo utilizado:
 
-Publish / Subscribe
+Publish / Subscribe  
 
+## Tópicos
 
-
-## Tópicos MQTT
-
-### Temperatura
-
-mackenzie/iot/grupo12/temperatura
-
-Função:
-
-Publicação dos valores de temperatura.
-
-
-
-### Umidade
-
-mackenzie/iot/grupo12/umidade
-
-Função:
-
-Publicação dos valores de umidade.
-
-
-
-### Controle do LED
-
-mackenzie/iot/grupo12/led
-
-Função:
-
-Recebimento de comandos remotos.
-
+- mackenzie/iot/grupo12/temperatura  
+- mackenzie/iot/grupo12/umidade  
+- mackenzie/iot/grupo12/led  
 
 Mensagens aceitas:
+
 - ON  
-- OFF
+- OFF  
 
-
+---
 
 # 7. Funcionamento Esperado
 
 ## Inicialização
 
-Ao iniciar o sistema:
+1. ESP32 liga  
+2. Sensor inicializa  
+3. Conecta ao Wi-Fi  
+4. Conecta ao HiveMQ  
+5. Inscreve no tópico do LED  
 
-1. O ESP32 é energizado.
-2. O sensor DHT22 é inicializado.
-3. O LED permanece desligado.
-4. O ESP32 conecta-se ao Wi-Fi.
-5. O ESP32 conecta-se ao broker MQTT.
-
-Mensagens esperadas:
-
-Wi-Fi conectado!
-
-Conectando ao MQTT...
-
-conectado!
-
-Inscrito no tópico:
-mackenzie/iot/grupo12/led
-
-
+---
 
 ## Leitura do Sensor
 
-A cada três segundos:
+A cada 3 segundos:
 
-* Temperatura é lida.
-* Umidade é lida.
-* Dados são enviados ao broker MQTT.
+* leitura de temperatura  
+* leitura de umidade  
+* envio via MQTT  
 
-Exemplo esperado:
-
-Temperatura: 25.0 °C
-
-Umidade: 60 %
-
-Dados enviados via MQTT
-
-
+---
 
 ## Controle Automático
 
-Caso:
+Temperatura ≥ 30°C:
 
-Temperatura ≥ 30°C
+→ LED liga automaticamente  
 
-O sistema deve:
-
-* Acionar o LED.
-* Informar o evento no monitor serial.
-
-Exemplo:
-
-LED ligado automaticamente
-
-Temperatura acima do limite
-
-
+---
 
 ## Controle Remoto
 
-Ao publicar:
+Publicação no tópico:
 
-Tópico:
+mackenzie/iot/grupo12/led  
 
-mackenzie/iot/grupo12/led
+ON → liga LED  
+OFF → desliga LED  
 
-Mensagem:
-
-ON
-
-Resultado esperado:
-
-LED ligado.
-
-Ao publicar:
-
-OFF
-
-Resultado esperado:
-
-LED desligado.
-
-
+---
 
 # 8. Estrutura do Software
 
-Principais bibliotecas utilizadas:
+Bibliotecas:
 
-WiFi.h
+* WiFi.h  
+* PubSubClient.h  
+* DHTesp.h  
 
-Responsável pela conexão Wi-Fi.
-
-PubSubClient.h
-
-Responsável pela comunicação MQTT.
-
-DHTesp.h
-
-Responsável pela leitura do sensor DHT22.
-
-
+---
 
 # 9. Estrutura do Código
 
-## conectarWiFi()
+* conectarWiFi()  
+* conectarMQTT()  
+* callback()  
+* loop()  
 
-Função responsável pela conexão do ESP32 à rede sem fio.
-
-
-
-## conectarMQTT()
-
-Função responsável pela conexão com o broker MQTT.
-
-
-
-## callback()
-
-Responsável por receber mensagens MQTT.
-
-Executa:
-
-* Leitura do tópico.
-* Interpretação do comando.
-* Acionamento do LED.
-
-
-
-## loop()
-
-Executa continuamente:
-
-* Verificação da conexão MQTT.
-* Leitura do sensor.
-* Publicação dos dados.
-* Controle automático do LED.
-
-
+---
 
 # 10. Resultados Obtidos
 
 Durante os testes foi possível validar:
 
-✓ Inicialização do ESP32
+✅ Conexão Wi-Fi  
+✅ Comunicação MQTT com HiveMQ  
+✅ Publicação de dados  
+✅ Controle remoto do LED  
+✅ Automação baseada na temperatura  
 
-✓ Conexão Wi-Fi
+---
 
-✓ Obtenção de endereço IP
+## Medição de desempenho
 
-✓ Comunicação MQTT
+### Atuador (HiveMQ → LED)
 
-✓ Inscrição em tópicos
+- 0,78 s  
+- 0,74 s  
+- 0,71 s  
+- 0,71 s  
 
-✓ Estrutura de publicação e assinatura
+**Média: 0,74 s**
 
-✓ Controle lógico do LED
+---
 
-Exemplo observado:
+### Sensor (DHT22 → HiveMQ)
 
-Wi-Fi conectado!
+- 0,45 s  
+- 0,39 s  
+- 0,46 s  
+- 0,50 s  
 
-IP: 10.10.0.2
+**Média: 0,45 s**
 
-Conectando ao MQTT...
+---
 
-conectado!
+### Análise
 
-Inscrito no tópico:
-mackenzie/iot/grupo12/led
+O sistema apresentou baixa latência em ambas as medições.
 
+O tempo de resposta do sensor (0,45 s) foi menor que o do atuador (0,74 s), debido ao fato de o atuador depender de um ciclo completo de envio, recepção e execução do comando.
 
-Além disso, foi possível validar a comunicação em tempo real utilizando o protocolo MQTT, com envio de comandos de controle do LED via MQTT Explorer e resposta imediata no sistema.
-
-Também foram realizadas medições de tempo de resposta do atuador, obtendo um tempo médio de aproximadamente 0,74 segundos, demonstrando baixa latência na comunicação
-
-
-
+---
 
 # 11. Limitações Encontradas
 
-Durante os testes realizados, o sistema apresentou funcionamento consistente na plataforma de simulação Wokwi.
+Foram observadas limitações na visualização de mensagens no cliente MQTT, porém o funcionamento do sistema foi validado através do monitor serial e testes práticos.
 
-Entretanto, foram identificadas algumas limitações relacionadas ao ambiente de simulação e à visualização das mensagens no MQTT Explorer, que nem sempre exibiu corretamente todos os tópicos publicados pelo ESP32.
-
-Apesar dessa limitação na interface de monitoramento, foi possível validar o funcionamento do sistema por meio do monitor serial, incluindo:
-
-* Leitura de temperatura e umidade;
-* Publicação de dados via MQTT;
-* Acionamento automático do LED com base na temperatura;
-* Controle remoto do LED através de comandos MQTT.
-
-Dessa forma, conclui-se que a arquitetura proposta foi implementada com sucesso.
-
-
+---
 
 # 12. Melhorias Futuras
 
-* Utilização de hardware físico real.
-* Dashboard de monitoramento.
-* Banco de dados para armazenamento histórico.
-* Integração com aplicativos móveis.
-* Notificações automáticas.
-* Inclusão de sensores adicionais.
+* Uso de hardware real  
+* Dashboard  
+* Banco de dados  
+* App mobile  
+* Novos sensores  
 
-
+---
 
 # 13. Tecnologias Utilizadas
 
-* ESP32
-* MQTT
-* Wi-Fi
-* DHT22
-* MQTT Explorer
-* Wokwi
-* Arduino Framework
-* C++
+* ESP32  
+* MQTT (HiveMQ)  
+* Wi-Fi  
+* DHT22  
+* Arduino  
+* Wokwi  
 
-
+---
 
 # 14. Repositório
 
-Link do GitHub:
+https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt  
 
-https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt
-
-
+---
 
 # 15. Vídeo Demonstrativo
 
-Link do YouTube:
+https://www.youtube.com/watch?v=boniY5BjQEc  
 
-https://www.youtube.com/watch?v=boniY5BjQEc
-
-
+---
 
 # 16. Conclusão
 
-O projeto permitiu aplicar conceitos fundamentais de Internet das Coisas, comunicação entre dispositivos, protocolos de rede e integração entre sensores e atuadores.
+O projeto demonstrou um sistema IoT completo, integrando sensoriamento, comunicação via MQTT e atuação remota.
 
-Foi possível validar o funcionamento completo do sistema, incluindo a leitura de temperatura e umidade, o envio de dados via MQTT e o controle do LED tanto de forma automática quanto remota.
+Os resultados mostraram baixa latência e funcionamento consistente, validando o uso do protocolo MQTT para aplicações em tempo real.
 
-Os resultados obtidos demonstram a viabilidade da solução proposta, destacando a eficiência do protocolo MQTT na comunicação entre dispositivos IoT.
+---
 
-O sistema pode ser expandido para aplicações reais, como monitoramento ambiental e automação residencial, podendo incluir dashboards, armazenamento em nuvem e integração com dispositivos móveis.
+# 17. Como Reproduzir
 
+1. Acesse o Wokwi  
+2. Execute o projeto  
+3. Conecte ao HiveMQ:
+   - broker.hivemq.com
+   - porta 1883  
 
+4. Inscreva-se:
+mackenzie/iot/grupo12/#  
 
-# 17. Como Reproduzir o Projeto
+5. Teste envio:
+- ON  
+- OFF  
 
-Para executar o projeto, siga os passos abaixo:
-
-1. Acesse a plataforma Wokwi:
-   https://wokwi.com/
-
-2. Utilize o código disponível neste repositório ou importe o projeto pelo link.
-
-3. Execute o sistema no simulador.
-
-4. Abra o MQTT Explorer e conecte-se ao broker:
-   - Host: broker.hivemq.com
-   - Porta: 1883
-
-5. Inscreva-se no tópico:
-   mackenzie/iot/grupo12/#
-
-6. Observe a publicação automática de temperatura e umidade.
-
-7. Para testar o atuador, publique:
-   - Tópico: mackenzie/iot/grupo12/led
-   - Mensagem: ON ou OFF
-
-8. Verifique o comportamento do LED no Wokwi.
-
+6. Observe o LED respondendo  
+``
