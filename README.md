@@ -389,7 +389,7 @@ https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt
 
 Link do YouTube:
 
-[INSERIR LINK]
+https://www.youtube.com/watch?v=boniY5BjQEc
 
 
 
