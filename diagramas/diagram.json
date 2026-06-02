@@ -3,7 +3,7 @@
   "author": "Grupo 12",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 120, "left": 20, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 115.2, "left": 24.04, "attrs": {} },
     {
       "type": "wokwi-dht22",
       "id": "dht1",
