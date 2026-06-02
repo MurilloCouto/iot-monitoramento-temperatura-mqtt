@@ -10,7 +10,6 @@
 
 ### Professor
 * Andre Luis de Oliveira
----
 
 # 1. Visão Geral do Projeto
 
@@ -20,7 +19,7 @@ A proposta consiste em monitorar temperatura e umidade do ambiente, transmitindo
 
 O projeto foi desenvolvido e testado utilizando a plataforma de simulação Wokwi.
 
----
+
 
 # 2. Objetivo
 
@@ -34,7 +33,6 @@ Desenvolver uma solução IoT capaz de:
 * Acionar um dispositivo de saída (LED).
 * Demonstrar os conceitos de sensoriamento, comunicação e atuação em sistemas IoT.
 
----
 
 # 3. Arquitetura do Sistema
 
@@ -53,7 +51,6 @@ Dados coletados:
 * Temperatura (°C)
 * Umidade Relativa (%)
 
----
 
 ## Camada de Processamento
 
@@ -70,7 +67,6 @@ Funções executadas:
 * Controle do LED.
 * Comunicação com o broker MQTT.
 
----
 
 ## Camada de Comunicação
 
@@ -89,7 +85,6 @@ Porta:
 
 1883
 
----
 
 # 4. Componentes Utilizados
 
@@ -103,7 +98,7 @@ Porta:
 | MQTT Explorer   | Monitoramento dos tópicos       |
 | Wokwi           | Simulação do circuito           |
 
----
+
 
 # 5. Diagrama de Funcionamento
 
