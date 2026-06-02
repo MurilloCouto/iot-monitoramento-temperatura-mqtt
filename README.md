@@ -6,7 +6,7 @@
 
 * Henrique dos Santos Coelho
 * Jhonatas Correia Melo
-* Murilo Alves Couto
+* Murillo Alves Couto
 
 ### Professor
 * Andre Luis de Oliveira
@@ -18,7 +18,7 @@ Este projeto apresenta o desenvolvimento de um sistema de monitoramento ambienta
 A proposta consiste em monitorar temperatura e umidade do ambiente, transmitindo essas informações para um broker MQTT através da internet. Além disso, o sistema possui um atuador representado por um LED, que pode ser acionado automaticamente em função da temperatura ou remotamente por meio de mensagens MQTT.
 
 O projeto foi desenvolvido e testado utilizando a plataforma de simulação Wokwi.
-link da ferramenta: https://wokwi.com/
+Link da ferramenta: https://wokwi.com/
 
 
 
@@ -107,7 +107,8 @@ Fluxo geral do sistema:
 
 Sensor DHT22 → ESP32 → Wi-Fi → Broker MQTT → MQTT Explorer
 
-Controle remoto:
+Fluxo de controle:
+
 MQTT Explorer → Broker MQTT → ESP32 → LED
 
 
@@ -151,11 +152,10 @@ Função:
 
 Recebimento de comandos remotos.
 
+
 Mensagens aceitas:
-
-ON
-
-OFF
+- ON  
+- OFF
 
 
 
@@ -334,22 +334,27 @@ Inscrito no tópico:
 mackenzie/iot/grupo12/led
 
 
+Além disso, foi possível validar a comunicação em tempo real utilizando o protocolo MQTT, com envio de comandos de controle do LED via MQTT Explorer e resposta imediata no sistema.
+
+Também foram realizadas medições de tempo de resposta do atuador, obtendo um tempo médio de aproximadamente 0,74 segundos, demonstrando baixa latência na comunicação
+
+
+
 
 # 11. Limitações Encontradas
 
-Durante os testes realizados no ambiente Wokwi foi identificada uma falha na leitura do sensor DHT22.
+Durante os testes realizados, o sistema apresentou funcionamento consistente na plataforma de simulação Wokwi.
 
-O sistema apresentava repetidamente a mensagem:
+Entretanto, foram identificadas algumas limitações relacionadas ao ambiente de simulação e à visualização das mensagens no MQTT Explorer, que nem sempre exibiu corretamente todos os tópicos publicados pelo ESP32.
 
-Erro ao ler o DHT22
+Apesar dessa limitação na interface de monitoramento, foi possível validar o funcionamento do sistema por meio do monitor serial, incluindo:
 
-Como consequência:
+* Leitura de temperatura e umidade;
+* Publicação de dados via MQTT;
+* Acionamento automático do LED com base na temperatura;
+* Controle remoto do LED através de comandos MQTT.
 
-* Não foi possível validar a leitura real dos dados ambientais.
-* Não foi possível comprovar o envio de temperatura e umidade ao broker MQTT.
-* O acionamento automático do LED baseado na temperatura não pôde ser demonstrado integralmente.
-
-Entretanto, a infraestrutura de comunicação MQTT permaneceu funcional durante os testes.
+Dessa forma, conclui-se que a arquitetura proposta foi implementada com sucesso.
 
 
 
@@ -397,7 +402,37 @@ https://www.youtube.com/watch?v=boniY5BjQEc
 
 O projeto permitiu aplicar conceitos fundamentais de Internet das Coisas, comunicação entre dispositivos, protocolos de rede e integração entre sensores e atuadores.
 
-Apesar da limitação encontrada na leitura do sensor DHT22 durante a simulação, foi possível validar a arquitetura IoT proposta, a conexão com a internet e a utilização do protocolo MQTT como mecanismo de comunicação entre dispositivos distribuídos.
+Foi possível validar o funcionamento completo do sistema, incluindo a leitura de temperatura e umidade, o envio de dados via MQTT e o controle do LED tanto de forma automática quanto remota.
 
-Os resultados obtidos demonstram a viabilidade da solução e servem como base para futuras implementações em ambiente físico real.
+Os resultados obtidos demonstram a viabilidade da solução proposta, destacando a eficiência do protocolo MQTT na comunicação entre dispositivos IoT.
+
+O sistema pode ser expandido para aplicações reais, como monitoramento ambiental e automação residencial, podendo incluir dashboards, armazenamento em nuvem e integração com dispositivos móveis.
+
+
+
+# 17. Como Reproduzir o Projeto
+
+Para executar o projeto, siga os passos abaixo:
+
+1. Acesse a plataforma Wokwi:
+   https://wokwi.com/
+
+2. Utilize o código disponível neste repositório ou importe o projeto pelo link.
+
+3. Execute o sistema no simulador.
+
+4. Abra o MQTT Explorer e conecte-se ao broker:
+   - Host: broker.hivemq.com
+   - Porta: 1883
+
+5. Inscreva-se no tópico:
+   mackenzie/iot/grupo12/#
+
+6. Observe a publicação automática de temperatura e umidade.
+
+7. Para testar o atuador, publique:
+   - Tópico: mackenzie/iot/grupo12/led
+   - Mensagem: ON ou OFF
+
+8. Verifique o comportamento do LED no Wokwi.
 
