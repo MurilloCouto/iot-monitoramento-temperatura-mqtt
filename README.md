@@ -259,7 +259,7 @@ https://github.com/MurilloCouto/iot-monitoramento-temperatura-mqtt
 
 # 15. Vídeo Demonstrativo
 
-https://www.youtube.com/watch?v=boniY5BjQEc  
+[https://www.youtube.com/watch?v=boniY5BjQEc](https://www.youtube.com/watch?v=UwB9aUJHbVA)  
 
 ---
 
